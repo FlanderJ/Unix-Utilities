@@ -33,7 +33,6 @@ void readFile(char *fileName) {
     char *buf=NULL,compressedLine[MAX_LINE];
 
     /* Print filename and open the file */
-    printf("File: %s\n",fileName);
     if ((file = fopen(fileName,"r"))==NULL) {
         printf("my-zip: cannot open file\n");
         exit(1);
@@ -55,7 +54,8 @@ void readFile(char *fileName) {
 /* Function to compress lines given to it as input */
 void compress(char *lineToCompress, char *compressedLine) {
     int count=1,i, compressedIdx=0;
-    char curChar = lineToCompress[0],intBuf[4];
+    char curChar = lineToCompress[0],intBuf[10];
+    compressedLine[0]='\0';
     /* Traverse through all characters of the line */
     for (i=1;i<strlen(lineToCompress);i++) {
         /* If current char equals the next one, then increase count */
@@ -67,7 +67,7 @@ void compress(char *lineToCompress, char *compressedLine) {
         else {
             /* In a case if there are more than one piece of the same char in a row */
             if (count != 1) {
-                if (count > 9) { /* If the count of of chars is more then 9, use different adding method */
+                if (count > 9) { /* If the count of of chars is more then 9, use different adding method for number */
                     sprintf(intBuf,"%d",count);
                     strcat(compressedLine,intBuf);
                     compressedIdx = compressedIdx + strlen(intBuf);
