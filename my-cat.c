@@ -34,7 +34,7 @@ void readFile(char *fileName) {
     while ((fgets(buf,MAX_LINE,file))!= NULL) {
         printf("%s",buf);
     }
-
+    printf("\n");
     /* Close the file */
     fclose(file);
     return;
